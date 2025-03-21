@@ -32,8 +32,10 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "dotenv-rails"
   gem "rspec-rails"
+  gem "factory_bot_rails"
   gem "shoulda-matchers"
   gem "rails-controller-testing"
+  gem 'faker'
 end
 
 group :development do
