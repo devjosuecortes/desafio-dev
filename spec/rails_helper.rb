@@ -7,7 +7,7 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 require 'rspec/rails'
-require 'devise'  # <-- Adicione esta linha
+require 'devise'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 

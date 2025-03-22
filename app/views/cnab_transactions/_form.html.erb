@@ -1,0 +1,32 @@
+<div class="p-6 flex flex-col items-center justify-center h-full">
+  <p class="text-gray-600 text-lg font-medium mb-4">Import Form</p>
+  <%= form_with url: cnab_transactions_path, local: true, multipart: true, html: { class: "flex flex-col" } do |f| %>
+    <div class="mb-7 pt-3 rounded bg-gray-200 field flex flex-col items-center">
+
+      <%= f.label :file, "Click to choose your file", class: "block text-gray-700 text-sm font-bold mr-4 mb-4 ml-4 justify-center items-center" %>
+
+      <div class="relative w-full">
+        <!-- Botão estilizado -->
+        <label for="file-upload" class="cursor-pointer flex justify-center items-center px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700">
+          Choose your file
+        </label>
+
+        <!-- Input invisível -->
+        <%= f.file_field :file, id: "file-upload", class: "absolute left-0 top-0 opacity-0 w-full h-full cursor-pointer" %>
+
+        <!-- Nome do arquivo selecionado -->
+        <span id="file-name" class="block text-gray-700 text-sm mt-2 text-center"></span>
+      </div>
+
+    </div>
+
+    <%= f.submit "Import", class: "inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+  <% end %>
+</div>
+
+<script>
+  document.getElementById('file-upload').addEventListener('change', function(event) {
+    var fileName = event.target.files.length > 0 ? event.target.files[0].name : "Nenhum arquivo selecionado";
+    document.getElementById('file-name').textContent = fileName;
+  });
+</script>

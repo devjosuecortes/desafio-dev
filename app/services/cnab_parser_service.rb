@@ -16,9 +16,12 @@ class CnabParserService
   end
 
   def call
+    result = nil
     ActiveRecord::Base.transaction do
       begin
-        return false unless validate_file
+        unless validate_file[:success]
+          return { success: false, errors: "File is empty or contains no valid data" }
+        end
 
         File.foreach(@file_path).with_index(1) do |line, line_number|
           next if line.strip.empty?
@@ -33,38 +36,37 @@ class CnabParserService
 
           Transaction.create!(transaction_data.merge(store: store))
         end
-        true
+        return { success: true }
       rescue Errno::ENOENT => e
-        handle_error("File not found: #{e.message}")
+        result = { success: false, errors: "File not found: #{e.message}" }
       rescue ArgumentError => e
-        handle_error("Invalid data format: #{e.message}")
+        result = { success: false, errors: "Invalid data format: #{e.message}" }
         raise ActiveRecord::Rollback
       rescue ActiveRecord::RecordInvalid => e
-        handle_error("Database error: #{e.message}")
+        result = { success: false, errors: "Database error: #{e.message}" }
         raise ActiveRecord::Rollback
       rescue StandardError => e
-        handle_error("An unexpected error occurred: #{e.message}")
+        result = { success: false, errors: "An unexpected error occurred: #{e.message}" }
         raise ActiveRecord::Rollback
       end
     end
+    result
   end
 
   private
 
   def validate_file
     unless File.exist?(@file_path)
-      handle_error("File not found: #{@file_path}")
-      return false
+      return { success: false, errors: "File not found" }
     end
-
+  
     lines = File.readlines(@file_path).map(&:strip).reject(&:empty?)
-
+  
     if lines.empty?
-      handle_error("File is empty or contains no valid data: #{@file_path}")
-      return false
+      return { success: false, errors: "File is empty or contains no valid data" }
     end
-
-    true
+  
+    { success: true }
   end
 
   def validate_line!(line, line_number)
@@ -139,10 +141,5 @@ class CnabParserService
     time = datetime.to_time
 
     [ date, time ]
-  end
-
-  def handle_error(message)
-    Rails.logger.error("[CnabParserService] #{message}")
-    false
   end
 end

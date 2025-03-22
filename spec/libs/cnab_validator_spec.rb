@@ -121,21 +121,15 @@ RSpec.describe CnabValidator do
   describe ".valid_time?" do
     context "with valid time strings" do
       it "returns a Time object for a valid time string" do
-        result = CnabValidator.valid_time?("123456")
-        expect(result).to be_a(Time)
-        expect(result.strftime("%H%M%S")).to eq("123456")
+        expect(CnabValidator.valid_time?("123456")).to be true
       end
 
       it "returns a Time object for the earliest possible time" do
-        result = CnabValidator.valid_time?("000000")
-        expect(result).to be_a(Time)
-        expect(result.strftime("%H%M%S")).to eq("000000")
+        expect(CnabValidator.valid_time?("000000")).to be true
       end
 
       it "returns a Time object for the latest possible time" do
-        result = CnabValidator.valid_time?("235959")
-        expect(result).to be_a(Time)
-        expect(result.strftime("%H%M%S")).to eq("235959")
+        expect(CnabValidator.valid_time?("235959")).to be true
       end
     end
 

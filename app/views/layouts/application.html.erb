@@ -32,6 +32,8 @@
         <%= render "layouts/shared/sidebar" %>
         <section class="flex-1 mr-1">
           <div id="main" class="main-content bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 min-h-screen">
+            <%= yield :page_title %>
+            <%= render "layouts/shared/flash_messages" %>
             <%= yield %>
           </div>
         </section>
@@ -70,6 +72,18 @@
           }
         }
       }
+
+      function closeFlash() {
+        document.getElementById("flash-message").style.display = "none";
+      }
+
+      setTimeout(function() {
+        var flash = document.getElementById("flash-message");
+        if (flash) {
+          flash.style.opacity = "0";
+          setTimeout(() => flash.style.display = "none", 4500);
+        }
+      }, 5000);
     </script>
 
   </body>

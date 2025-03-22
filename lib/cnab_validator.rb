@@ -16,6 +16,13 @@ module CnabValidator
   end
 
   def self.valid_time?(time_str)
-    Time.strptime(time_str, "%H%M%S") rescue false
+    time = Time.strptime(time_str, "%H%M%S") rescue nil
+    return false unless time
+
+    hour = time.hour
+    minute = time.min
+    second = time.sec
+
+    (0..23).cover?(hour) && (0..59).cover?(minute) && (0..59).cover?(second)
   end
 end

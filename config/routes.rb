@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get "dashboard", to: "dashboard#show"
 
+  resources :cnab_transactions, only: [:new, :create]
+
   devise_scope :user do
     authenticated :user do
       root "dashboard#show", as: :authenticated_root
