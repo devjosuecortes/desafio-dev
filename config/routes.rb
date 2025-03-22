@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
+  mount Rswag::Ui::Engine => "/api-docs"
+  mount Rswag::Api::Engine => "/api-docs"
   devise_for :users
 
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "dashboard", to: "dashboard#show"
 
-  resources :cnab_transactions, only: [:new, :create]
+  resources :cnab_transactions, only: [ :new, :create ]
 
   devise_scope :user do
     authenticated :user do

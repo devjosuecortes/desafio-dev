@@ -2,29 +2,29 @@ require 'swagger_helper'
 
 RSpec.describe 'API', type: :request do
   # path '/users/sign_in' do
-    # post 'User Login' do
-    #   tags 'Authentication'
-    #   consumes 'application/json'
-    #   produces 'application/json'
-    #   parameter name: :user, in: :body, schema: {
-    #     type: :object,
-    #     properties: {
-    #       email: { type: :string, example: 'user@example.com' },
-    #       password: { type: :string, example: 'password123' }
-    #     },
-    #     required: %w[email password]
-    #   }
+  # post 'User Login' do
+  #   tags 'Authentication'
+  #   consumes 'application/json'
+  #   produces 'application/json'
+  #   parameter name: :user, in: :body, schema: {
+  #     type: :object,
+  #     properties: {
+  #       email: { type: :string, example: 'user@example.com' },
+  #       password: { type: :string, example: 'password123' }
+  #     },
+  #     required: %w[email password]
+  #   }
 
-    #   response '200', 'Login successful' do
-    #     let(:user) { { email: 'user@example.com', password: 'password123' } }
-    #     run_test!
-    #   end
+  #   response '200', 'Login successful' do
+  #     let(:user) { { email: 'user@example.com', password: 'password123' } }
+  #     run_test!
+  #   end
 
-    #   response '401', 'Unauthorized' do
-    #     let(:user) { { email: 'wrong@example.com', password: 'wrong' } }
-    #     run_test!
-    #   end
-    # end
+  #   response '401', 'Unauthorized' do
+  #     let(:user) { { email: 'wrong@example.com', password: 'wrong' } }
+  #     run_test!
+  #   end
+  # end
   # end
 
   # path '/users/sign_up' do

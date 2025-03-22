@@ -59,13 +59,13 @@ class CnabParserService
     unless File.exist?(@file_path)
       return { success: false, errors: "File not found" }
     end
-  
+
     lines = File.readlines(@file_path).map(&:strip).reject(&:empty?)
-  
+
     if lines.empty?
       return { success: false, errors: "File is empty or contains no valid data" }
     end
-  
+
     { success: true }
   end
 

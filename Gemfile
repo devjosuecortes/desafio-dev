@@ -37,10 +37,10 @@ group :development, :test do
   gem "rails-controller-testing"
   gem "faker"
   gem "byebug"
-  gem 'rswag'
-  gem 'rswag-ui'
-  gem 'rswag-api'
-  gem 'rswag-specs'
+  gem "rswag"
+  gem "rswag-ui"
+  gem "rswag-api"
+  gem "rswag-specs"
 end
 
 group :development do
